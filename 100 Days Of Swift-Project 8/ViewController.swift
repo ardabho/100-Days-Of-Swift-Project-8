@@ -8,12 +8,17 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     var cluesLabel: UILabel!
     var answersLabel: UILabel!
     var currentAnswer: UITextField!
     var scoreLabel: UILabel!
     var letterButtons = [UIButton]()
+    var activatedButtons = [UIButton]()
+    var solutions = [String]()
+    
+    var score = 0
+    var level = 1
     
     override func loadView() {
         view = UIView()
@@ -41,7 +46,7 @@ class ViewController: UIViewController {
         answersLabel.text = "ANSWERS"
         answersLabel.setContentHuggingPriority(UILayoutPriority(1), for: .vertical)
         view.addSubview(answersLabel)
-                
+        
         currentAnswer = UITextField()
         currentAnswer.translatesAutoresizingMaskIntoConstraints = false
         currentAnswer.isUserInteractionEnabled = false
@@ -54,12 +59,14 @@ class ViewController: UIViewController {
         submit.setTitle("SUBMIT", for: .normal)
         submit.translatesAutoresizingMaskIntoConstraints = false
         submit.setTitleColor(.black, for: .normal)
+        submit.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
         view.addSubview(submit)
         
         let clear = UIButton()
         clear.translatesAutoresizingMaskIntoConstraints = false
         clear.setTitle("CLEAR", for: .normal)
         clear.setTitleColor(.black, for: .normal)
+        clear.addTarget(self, action: #selector(clearTapped), for: .touchUpInside)
         view.addSubview(clear)
         
         let buttonsView = UIView()
@@ -98,7 +105,7 @@ class ViewController: UIViewController {
             buttonsView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonsView.topAnchor.constraint(equalTo: submit.bottomAnchor, constant: 20),
             buttonsView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -20)
-
+            
         ])
         
         // set some values for the width and height of each button
@@ -125,17 +132,67 @@ class ViewController: UIViewController {
                 
                 // and also to our letterButtons array
                 letterButtons.append(letterButton)
-
+                
+                letterButton.addTarget(self, action: #selector(letterTapped), for: .touchUpInside)
             }
         }
+    }
+    
+    @objc func letterTapped(_ sender: UIButton) {
+    }
+    
+    @objc func submitTapped(_ sender: UIButton) {
+    }
+    
+    @objc func clearTapped(_ sender: UIButton) {
+    }
+    
+    func loadLevel() {
+        var clueString = ""
+        var solutionString = ""
+        var letterBits = [String]()
         
+        if let levelFileURL = Bundle.main.url(forResource: "level\(level)", withExtension: "txt") {
+            if let levelContent = try? String(contentsOf: levelFileURL) {
+                var lines = levelContent.components(separatedBy: "\n")
+                lines.shuffle()
+                
+                for (index, line) in lines.enumerated() {
+                    let parts = line.components(separatedBy: ":")
+                    let clue = parts[1]
+                    let answer = parts[0]
+                    
+                    //Set the clue string
+                    clueString += "\(index). \(clue)\n"
+                    
+                    //set the solutions string
+                    let solutionWord = answer.replacingOccurrences(of: "|", with: "")
+                    solutionString += "\(solutionWord.count) letters\n"
+                    solutions.append(solutionWord)
+                    
+                    //set letterbits array:
+                    let bits = answer.components(separatedBy: "|")
+                    letterBits += bits
+                }
+            }
+        }
+        cluesLabel.text = clueString.trimmingCharacters(in: .whitespacesAndNewlines)
+        answersLabel.text = solutionString.trimmingCharacters(in: .whitespacesAndNewlines)
+        letterBits.shuffle()
+        
+        if letterBits.count == letterButtons.count {
+            for i in 0..<letterButtons.count {
+                letterButtons[i].setTitle(letterBits[i], for: .normal)
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        loadLevel()
     }
-
-
+    
+    
 }
 

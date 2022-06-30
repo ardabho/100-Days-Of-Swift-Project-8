@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77D308C8286DD99200C2B81A /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 77D308C6286DD99200C2B81A /* level1.txt */; };
+		77D308C9286DD99200C2B81A /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 77D308C7286DD99200C2B81A /* level2.txt */; };
 		77DA79F7286AE80A004E7765 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DA79F6286AE80A004E7765 /* AppDelegate.swift */; };
 		77DA79F9286AE80A004E7765 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DA79F8286AE80A004E7765 /* SceneDelegate.swift */; };
 		77DA79FB286AE80A004E7765 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DA79FA286AE80A004E7765 /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		77D308C6286DD99200C2B81A /* level1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
+		77D308C7286DD99200C2B81A /* level2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
 		77DA79F3286AE80A004E7765 /* 100 Days Of Swift-Project 8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "100 Days Of Swift-Project 8.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77DA79F6286AE80A004E7765 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77DA79F8286AE80A004E7765 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +67,8 @@
 				77DA79FF286AE80A004E7765 /* Assets.xcassets */,
 				77DA7A01286AE80A004E7765 /* LaunchScreen.storyboard */,
 				77DA7A04286AE80A004E7765 /* Info.plist */,
+				77D308C6286DD99200C2B81A /* level1.txt */,
+				77D308C7286DD99200C2B81A /* level2.txt */,
 			);
 			path = "100 Days Of Swift-Project 8";
 			sourceTree = "<group>";
@@ -125,7 +131,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77D308C9286DD99200C2B81A /* level2.txt in Resources */,
 				77DA7A03286AE80A004E7765 /* LaunchScreen.storyboard in Resources */,
+				77D308C8286DD99200C2B81A /* level1.txt in Resources */,
 				77DA7A00286AE80A004E7765 /* Assets.xcassets in Resources */,
 				77DA79FE286AE80A004E7765 /* Main.storyboard in Resources */,
 			);
