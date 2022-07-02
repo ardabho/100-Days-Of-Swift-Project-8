@@ -183,7 +183,10 @@ class ViewController: UIViewController {
         level += 1
         solutions.removeAll(keepingCapacity: true)
         
-        loadLevel()
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.loadLevel()
+        }
+        
         
         for button in letterButtons {
             button.isHidden = false
@@ -231,19 +234,26 @@ class ViewController: UIViewController {
                 }
             }
         }
-        cluesLabel.text = clueString.trimmingCharacters(in: .whitespacesAndNewlines)
-        answersLabel.text = solutionString.trimmingCharacters(in: .whitespacesAndNewlines)
-        letterBits.shuffle()
         
-        if letterBits.count == letterButtons.count {
-            for i in 0..<letterButtons.count {
-                letterButtons[i].setTitle(letterBits[i], for: .normal)
+        //Update the UI in main thread
+        DispatchQueue.main.async {
+            self.cluesLabel.text = clueString.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.answersLabel.text = solutionString.trimmingCharacters(in: .whitespacesAndNewlines)
+            letterBits.shuffle()
+            
+            if letterBits.count == self.letterButtons.count {
+                for i in 0 ..< self.letterButtons.count {
+                    self.letterButtons[i].setTitle(letterBits[i], for: .normal)
+                }
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadLevel()
+        
+        DispatchQueue.global().async {
+            self.loadLevel()
+        }
     }
 }
